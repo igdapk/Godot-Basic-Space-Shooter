@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://lp3kgvrdhyv3"]
+
+[ext_resource type="Script" path="res://Spawner.gd" id="1_1un5k"]
+[ext_resource type="Script" path="res://Player.gd" id="1_26n5s"]
+[ext_resource type="Texture2D" uid="uid://bu013brnhd7u3" path="res://PNG/playerShip2_blue.png" id="1_qi0jn"]
+[ext_resource type="PackedScene" uid="uid://c37yb1jp5gex5" path="res://Enemy1.tscn" id="2_g2cv7"]
+[ext_resource type="PackedScene" uid="uid://csiosby5pc72x" path="res://Bullet.tscn" id="2_w0tcu"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("enemies_node", "spawnPoints")]
+script = ExtResource("1_1un5k")
+enemies_node = NodePath("Enemies")
+spawnPoints = [NodePath("Spawn1"), NodePath("Spawn2"), NodePath("Spawn3"), NodePath("Spawn4"), NodePath("Spawn5"), NodePath("Spawn6"), NodePath("Spawn7"), NodePath("Spawn8"), NodePath("Spawn9"), NodePath("Spawn10"), NodePath("Spawn11")]
+enemies = Array[PackedScene]([ExtResource("2_g2cv7")])
+
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("emitter_node", "bullets")]
+unique_name_in_owner = true
+script = ExtResource("1_26n5s")
+speed = 600
+velocity_tightness = 0.05
+rotation_tightness = 0.15
+emitter_node = NodePath("Emitter")
+bullets = NodePath("../Bullets")
+bullet = ExtResource("2_w0tcu")
+
+[node name="PlayerShip2Blue" type="Sprite2D" parent="Player"]
+rotation = 1.5708
+texture = ExtResource("1_qi0jn")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+rotation = 1.5708
+polygon = PackedVector2Array(56, -16.7, 56, 37.5, -56, 37.5, -56, -16.2, -27.4, -37.5, 26.5, -37.5)
+
+[node name="Emitter" type="Node2D" parent="Player"]
+position = Vector2(60, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Node2D" parent="."]
+position = Vector2(-696, -434)
+
+[node name="Spawn2" type="Node2D" parent="."]
+position = Vector2(-212, -466)
+
+[node name="Spawn3" type="Node2D" parent="."]
+position = Vector2(274, -458)
+
+[node name="Spawn4" type="Node2D" parent="."]
+position = Vector2(756, -444)
+
+[node name="Spawn5" type="Node2D" parent="."]
+position = Vector2(732, -60)
+
+[node name="Spawn6" type="Node2D" parent="."]
+position = Vector2(750, 302)
+
+[node name="Spawn7" type="Node2D" parent="."]
+position = Vector2(322, 432)
+
+[node name="Spawn8" type="Node2D" parent="."]
+position = Vector2(-118, 460)
+
+[node name="Spawn9" type="Node2D" parent="."]
+position = Vector2(-508, 460)
+
+[node name="Spawn10" type="Node2D" parent="."]
+position = Vector2(-752, 216)
+
+[node name="Spawn11" type="Node2D" parent="."]
+position = Vector2(-774, -132)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://lp3kgvrdhyv3"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_26n5s"]
+[ext_resource type="Texture2D" uid="uid://bu013brnhd7u3" path="res://PNG/playerShip2_blue.png" id="1_qi0jn"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_26n5s")
+speed = null
+velocity_tightness = null
+rotation_tightness = null
+
+[node name="PlayerShip2Blue" type="Sprite2D" parent="Player"]
+rotation = 1.5708
+texture = ExtResource("1_qi0jn")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+rotation = 1.5708
+polygon = PackedVector2Array(56, -16.7, 56, 37.5, -56, 37.5, -56, -16.2, -27.4, -37.5, 26.5, -37.5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
